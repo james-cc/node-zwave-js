@@ -1058,6 +1058,27 @@ export function extractRawECDHPrivateKey(privateKey: crypto.KeyObject): Uint8Arr
 // @public
 export function extractRawECDHPublicKey(publicKey: crypto.KeyObject): Uint8Array;
 
+// Warning: (ae-missing-release-tag) "fail" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function fail(reason: string): never;
+
+// Warning: (ae-missing-release-tag) "FileSystem" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export interface FileSystem {
+    // (undocumented)
+    ensureDir(path: string): Promise<void>;
+    // (undocumented)
+    pathExists(path: string): Promise<boolean>;
+    // (undocumented)
+    readFile(file: string, encoding: BufferEncoding): Promise<string>;
+    // (undocumented)
+    writeFile(file: string, data: string | Uint8Array, options?: {
+        encoding: BufferEncoding;
+    } | BufferEncoding): Promise<void>;
+}
+
 // Warning: (ae-missing-release-tag) "Firmware" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1676,30 +1697,13 @@ export enum Indicator {
 // @public (undocumented)
 export type IndicatorProperties = typeof indicatorProperties;
 
+// Warning: (ae-forgotten-export) The symbol "IndicatorPropertyDefinition" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "IndicatorProperty" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface IndicatorProperty extends IndicatorPropertyDefinition {
     // (undocumented)
     readonly id: number;
-}
-
-// Warning: (ae-missing-release-tag) "IndicatorPropertyDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export interface IndicatorPropertyDefinition {
-    // (undocumented)
-    readonly description?: string;
-    // (undocumented)
-    readonly label: string;
-    // (undocumented)
-    readonly max?: number;
-    // (undocumented)
-    readonly min?: number;
-    // (undocumented)
-    readonly readonly?: boolean;
-    // (undocumented)
-    readonly type?: ValueType;
 }
 
 // Warning: (ae-missing-release-tag) "IntegerLimits" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1794,11 +1798,6 @@ export function isEmptyRoute(route: Route): boolean;
 //
 // @public
 export function isEncapsulationCC(cc: CommandClasses): boolean;
-
-// Warning: (ae-missing-release-tag) "isExtendedCCId" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export function isExtendedCCId(ccId: CommandClasses): boolean;
 
 // Warning: (ae-missing-release-tag) "isLongRangeNodeId" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -2126,109 +2125,11 @@ export interface MeterDefinition {
     readonly scales: MeterScaleGroup;
 }
 
+// Warning: (ae-forgotten-export) The symbol "meters" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Meters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type Meters = typeof meters;
-
-// Warning: (ae-missing-release-tag) "meters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export const meters: Readonly<{
-    readonly 1: {
-        readonly name: "Electric";
-        readonly scales: {
-            readonly 0: {
-                readonly label: "kWh";
-                readonly unit: "kWh";
-            };
-            readonly 1: {
-                readonly label: "kVAh";
-                readonly unit: "kVAh";
-            };
-            readonly 2: {
-                readonly label: "W";
-                readonly unit: "W";
-            };
-            readonly 3: {
-                readonly label: "Pulse count";
-            };
-            readonly 4: {
-                readonly label: "V";
-                readonly unit: "V";
-            };
-            readonly 5: {
-                readonly label: "A";
-                readonly unit: "A";
-            };
-            readonly 6: {
-                readonly label: "Power Factor";
-            };
-            readonly 7: {
-                readonly label: "kVar";
-                readonly unit: "kVar";
-            };
-            readonly 8: {
-                readonly label: "kVarh";
-                readonly unit: "kVarh";
-            };
-        };
-    };
-    readonly 2: {
-        readonly name: "Gas";
-        readonly scales: {
-            readonly 0: {
-                readonly label: "Cubic meters";
-                readonly unit: "m³";
-            };
-            readonly 1: {
-                readonly label: "Cubic feet";
-                readonly unit: "ft³";
-            };
-            readonly 3: {
-                readonly label: "Pulse count";
-            };
-        };
-    };
-    readonly 3: {
-        readonly name: "Water";
-        readonly scales: {
-            readonly 0: {
-                readonly label: "Cubic meters";
-                readonly unit: "m³";
-            };
-            readonly 1: {
-                readonly label: "Cubic feet";
-                readonly unit: "ft³";
-            };
-            readonly 2: {
-                readonly label: "US gallons";
-                readonly unit: "gal";
-            };
-            readonly 3: {
-                readonly label: "Pulse count";
-            };
-        };
-    };
-    readonly 4: {
-        readonly name: "Heating";
-        readonly scales: {
-            readonly 0: {
-                readonly label: "kWh";
-                readonly unit: "kWh";
-            };
-        };
-    };
-    readonly 5: {
-        readonly name: "Cooling";
-        readonly scales: {
-            readonly 0: {
-                readonly label: "kWh";
-                readonly unit: "kWh";
-            };
-        };
-    };
-}>;
 
 // Warning: (ae-missing-release-tag) "MeterScale" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -2252,6 +2153,11 @@ export interface MeterScaleDefinition {
 //
 // @public (undocumented)
 export type MeterScaleGroup = Record<number, MeterScaleDefinition>;
+
+// Warning: (ae-missing-release-tag) "minQRCodeLength" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const minQRCodeLength = 52;
 
 // Warning: (ae-missing-release-tag) "ModifyCCs" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -2722,9 +2628,25 @@ export function parseNumber(val: number): number | undefined;
 export function parsePartial(value: number, bitMask: number, signed: boolean): number;
 
 // Warning: (ae-missing-release-tag) "parseQRCodeString" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "@zwave-js/core" does not have an export "parseQRCodeStringAsync"
 //
-// @public
+// @public @deprecated
 export function parseQRCodeString(qr: string): QRProvisioningInformation;
+
+// Warning: (ae-missing-release-tag) "parseTLV" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function parseTLV(qr: string): {
+    entry: {
+        type: ProvisioningInformationType;
+    } & Record<string, any>;
+    charsRead: number;
+};
+
+// Warning: (ae-missing-release-tag) "parseTLVData" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function parseTLVData(type: ProvisioningInformationType, data: string): ProvisioningInformation_ProductType | ProvisioningInformation_ProductId | ProvisioningInformation_MaxInclusionRequestInterval | ProvisioningInformation_UUID16 | ProvisioningInformation_SupportedProtocols | undefined;
 
 // Warning: (ae-missing-release-tag) "PhysicalNodes" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -2907,6 +2829,21 @@ export interface QuerySecurityClasses {
     hasSecurityClass(securityClass: SecurityClass): MaybeNotKnown<boolean>;
     readonly isSecure: MaybeNotKnown<boolean>;
 }
+
+// Warning: (ae-missing-release-tag) "readLevel" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function readLevel(qr: string, offset: number): number;
+
+// Warning: (ae-missing-release-tag) "readUInt16" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function readUInt16(qr: string, offset: number): number;
+
+// Warning: (ae-missing-release-tag) "readUInt8" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function readUInt8(qr: string, offset: number): number;
 
 // Warning: (ae-missing-release-tag) "ReflectionDecorator" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -3675,7 +3612,7 @@ export enum TransmitStatus {
 
 // Warning: (ae-missing-release-tag) "tryParseDSKFromQRCodeString" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @public
+// @public (undocumented)
 export function tryParseDSKFromQRCodeString(qr: string): string | undefined;
 
 // Warning: (ae-missing-release-tag) "tryParseParamNumber" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -3684,6 +3621,15 @@ export function tryParseDSKFromQRCodeString(qr: string): string | undefined;
 export function tryParseParamNumber(str: string): {
     parameter: number;
     valueBitMask?: number;
+} | undefined;
+
+// Warning: (ae-missing-release-tag) "tryUnzipFirmwareFile" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function tryUnzipFirmwareFile(zipData: Uint8Array): {
+    filename: string;
+    format: FirmwareFileFormat;
+    rawData: Uint8Array;
 } | undefined;
 
 // Warning: (ae-missing-release-tag) "TXReport" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -4640,9 +4586,9 @@ export interface ZWaveLogInfo<TContext extends LogContext = LogContext> extends 
 
 // Warnings were encountered during analysis:
 //
-// src/security/Manager2.ts:118:79 - (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
-// src/security/Manager2.ts:118:98 - (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
-// src/security/QR.ts:100:3 - (ae-unresolved-link) The @link reference could not be resolved: The package "@zwave-js/core" does not have an export "requestedSecurityClasses"
+// src/qr/definitions.ts:63:3 - (ae-unresolved-link) The @link reference could not be resolved: The package "@zwave-js/core" does not have an export "requestedSecurityClasses"
+// src/security/Manager2.ts:121:79 - (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+// src/security/Manager2.ts:121:98 - (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
 
 // (No @packageDocumentation comment for this package)
 

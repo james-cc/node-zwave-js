@@ -60,8 +60,7 @@ import { Expand } from '@zwave-js/shared';
 import { Expand as Expand_2 } from '@zwave-js/shared/safe';
 import { ExtendedNVMOperationsCommand } from '@zwave-js/serial/serialapi';
 import { extractFirmware } from '@zwave-js/core';
-import { FileSystem } from '@zwave-js/host/safe';
-import type { FileSystem as FileSystem_2 } from '@zwave-js/host';
+import { FileSystem } from '@zwave-js/core';
 import { Firmware } from '@zwave-js/core';
 import { FirmwareFileFormat } from '@zwave-js/core';
 import { FirmwareUpdateCapabilities } from '@zwave-js/cc';
@@ -452,7 +451,7 @@ export class Driver extends TypedEventEmitter<DriverEventCallbacks> implements C
         remote?: boolean;
     }): Promise<string[]>;
     // (undocumented)
-    exceedsMaxPayloadLength(msg: SendDataMessage): boolean;
+    exceedsMaxPayloadLength(msg: SendDataMessage): Promise<boolean>;
     getCommunicationTimeouts(): ZWaveHostOptions["timeouts"];
     getConservativeWaitTimeAfterFirmwareUpdate(advertisedWaitTime: number | undefined): number;
     // (undocumented)
@@ -793,6 +792,7 @@ export interface GetFirmwareUpdatesOptions {
     additionalUserAgentComponents?: Record<string, string>;
     apiKey?: string;
     includePrereleases?: boolean;
+    rfRegion?: RFRegion_2;
 }
 
 export { guessFirmwareFileFormat }
@@ -2346,7 +2346,7 @@ export interface ZWaveOptions extends ZWaveHostOptions {
     };
     // (undocumented)
     storage: {
-        driver: FileSystem_2;
+        driver: FileSystem;
         cacheDir: string;
         lockDir?: string;
         deviceConfigExternalDir?: string;
@@ -2394,17 +2394,19 @@ export * from "@zwave-js/cc";
 // /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/ColorSwitchCC.ts:481:9 - (TS2345) Argument of type '("index" | "warmWhite" | "coldWhite" | "red" | "green" | "blue" | "amber" | "cyan" | "purple" | undefined)[]' is not assignable to parameter of type 'readonly (string | number | symbol)[]'.
 //   Type 'string | undefined' is not assignable to type 'string | number | symbol'.
 //     Type 'undefined' is not assignable to type 'string | number | symbol'.
-// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/ConfigurationCC.ts:1284:36 - (TS2345) Argument of type 'string | number' is not assignable to parameter of type 'number'.
+// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/ConfigurationCC.ts:1282:36 - (TS2345) Argument of type 'string | number' is not assignable to parameter of type 'number'.
 //   Type 'string' is not assignable to type 'number'.
-// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/ConfigurationCC.ts:1291:20 - (TS2345) Argument of type 'string | number' is not assignable to parameter of type 'number'.
+// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/ConfigurationCC.ts:1289:20 - (TS2345) Argument of type 'string | number' is not assignable to parameter of type 'number'.
 //   Type 'string' is not assignable to type 'number'.
-// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/ConfigurationCC.ts:1415:35 - (TS2345) Argument of type 'string | number' is not assignable to parameter of type 'number'.
+// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/ConfigurationCC.ts:1413:35 - (TS2345) Argument of type 'string | number' is not assignable to parameter of type 'number'.
 //   Type 'string' is not assignable to type 'number'.
 // /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/Security2CC.ts:458:24 - (TS2339) Property 'groupId' does not exist on type 'Security2Extension'.
 // /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/Security2CC.ts:466:24 - (TS2339) Property 'senderEI' does not exist on type 'Security2Extension'.
-// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/Security2CC.ts:1663:20 - (TS2339) Property 'groupId' does not exist on type 'Security2Extension'.
-// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/Security2CC.ts:1666:34 - (TS2339) Property 'innerMPANState' does not exist on type 'Security2Extension'.
-// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/Security2CC.ts:1816:19 - (TS2339) Property 'senderEI' does not exist on type 'Security2Extension'.
+// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/Security2CC.ts:1664:20 - (TS2339) Property 'groupId' does not exist on type 'Security2Extension'.
+// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/Security2CC.ts:1667:34 - (TS2339) Property 'innerMPANState' does not exist on type 'Security2Extension'.
+// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/Security2CC.ts:2003:20 - (TS2339) Property 'groupId' does not exist on type 'Security2Extension'.
+// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/Security2CC.ts:2006:34 - (TS2339) Property 'innerMPANState' does not exist on type 'Security2Extension'.
+// /home/runner/work/node-zwave-js/node-zwave-js/packages/cc/src/cc/Security2CC.ts:2156:19 - (TS2339) Property 'senderEI' does not exist on type 'Security2Extension'.
 // /home/runner/work/node-zwave-js/node-zwave-js/packages/nvmedit/src/lib/NVM3.ts:434:20 - (TS18048) 'h' is possibly 'undefined'.
 // /home/runner/work/node-zwave-js/node-zwave-js/packages/nvmedit/src/lib/NVM3.ts:437:33 - (TS18048) 'header' is possibly 'undefined'.
 // /home/runner/work/node-zwave-js/node-zwave-js/packages/nvmedit/src/lib/NVM3.ts:438:54 - (TS18048) 'header' is possibly 'undefined'.
@@ -2419,16 +2421,16 @@ export * from "@zwave-js/cc";
 //   The runtime will invoke the decorator with 2 arguments, but the decorator expects 1.
 // src/lib/controller/Controller.ts:997:2 - (ae-missing-getter) The property "provisioningList" has a setter but no getter.
 // src/lib/driver/Driver.ts:846:24 - (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
-// src/lib/driver/Driver.ts:4687:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
-// src/lib/driver/Driver.ts:5847:2 - (ae-unresolved-link) The @link reference could not be resolved: The package "zwave-js" does not have an export "drainSerialAPIQueue"
-// src/lib/driver/Driver.ts:6249:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
-// src/lib/driver/Driver.ts:6250:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
-// src/lib/driver/Driver.ts:6292:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
-// src/lib/driver/Driver.ts:6293:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
-// src/lib/driver/Driver.ts:6439:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
-// src/lib/driver/ZWaveOptions.ts:289:120 - (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
-// src/lib/node/Node.ts:558:2 - (ae-missing-getter) The property "deviceConfigHash" has a setter but no getter.
-// src/lib/node/Node.ts:2245:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/driver/Driver.ts:4692:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/driver/Driver.ts:5852:2 - (ae-unresolved-link) The @link reference could not be resolved: The package "zwave-js" does not have an export "drainSerialAPIQueue"
+// src/lib/driver/Driver.ts:6254:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/driver/Driver.ts:6255:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/driver/Driver.ts:6297:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/driver/Driver.ts:6298:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/driver/Driver.ts:6444:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/driver/ZWaveOptions.ts:294:120 - (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+// src/lib/node/Node.ts:557:2 - (ae-missing-getter) The property "deviceConfigHash" has a setter but no getter.
+// src/lib/node/Node.ts:2242:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
 // src/lib/zniffer/Zniffer.ts:701:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
 // src/lib/zniffer/Zniffer.ts:702:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
 
